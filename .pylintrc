@@ -1,0 +1,14 @@
+[MASTER]
+load-plugins=pylint_django
+django-settings-module=csfd_task.settings
+ignore=migrations, tests, management
+
+# C0114, C0115, C0116 - docstrings, W1203 - f-string for logger, R0903 - too few public methods
+disable= C0114, C0115, C0116, W1203, R0903
+
+[FORMAT]
+max-line-length=120
+
+# R0901: Too many ancestors
+[DESIGN]
+max-parents=10
