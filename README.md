@@ -44,4 +44,3 @@ pylint app
 ```sh
 python manage.py test
 ```
-# csfd-task-backend

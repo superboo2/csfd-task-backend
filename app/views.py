@@ -1,14 +1,15 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
-
-from app.filters import FilmFilter, ActorFilter
+from rest_framework import viewsets, filters
 from app.models import Film, Actor
 from app.serializers import FilmSerializer, ActorSerializer, FilmDetailSerializer, ActorDetailSerializer
 
 
 class FilmViewSet(viewsets.ReadOnlyModelViewSet):
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = FilmFilter
+    filter_backends = [filters.SearchFilter]
+    search_fields = [
+        "name",
+        "name_normalized",
+    ]
+
     queryset = Film.objects.all().order_by("id")
 
     def get_serializer_class(self):
@@ -18,8 +19,11 @@ class FilmViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ActorViewSet(viewsets.ReadOnlyModelViewSet):
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = ActorFilter
+    filter_backends = [filters.SearchFilter]
+    search_fields = [
+        "name",
+        "name_normalized",
+    ]
     queryset = Actor.objects.all().order_by("id")
 
     def get_serializer_class(self):
